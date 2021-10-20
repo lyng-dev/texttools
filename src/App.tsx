@@ -83,7 +83,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>Generator: (overwrites input)</div>
+      <h1>Generator: (overwrites input)</h1>
       Count:
       <input
         type="number"
