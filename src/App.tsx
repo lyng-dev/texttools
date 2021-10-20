@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.scss";
+import "./App.css";
 
 //TODO: perform functions can be joined into a generic implementation
 //DONE: adding elements to trasnofrm and format can be made generic as well
@@ -97,13 +97,17 @@ function App() {
         }
       />
       Type:
-      <button onClick={() => doGenerate(generateUUID, generateCount)}>
+      <button
+        onClick={() => doGenerate(generateUUID, generateCount)}
+        className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+      >
         GUID
       </button>{" "}
       <button
         onClick={() =>
           doGenerate(generateRandomNumber, generateCount, randomFrom, randomTo)
         }
+        className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
       >
         Numbers
       </button>{" "}
@@ -130,18 +134,24 @@ function App() {
       />
       [<div>Formatters:</div>
       <div>
-        <button onClick={() => doAdd(toUpperCase, formats, setFormats)}>
+        <button
+          onClick={() => doAdd(toUpperCase, formats, setFormats)}
+          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+        >
           UPPERCASE
         </button>
-        <button onClick={() => doAdd(toLowerCase, formats, setFormats)}>
+        <button
+          onClick={() => doAdd(toLowerCase, formats, setFormats)}
+          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+        >
           lowercase
         </button>
       </div>
       <div>Selected:</div>
-      <div>
+      <div className="flex space-x-4">
         {[...formats].reverse().map((item: Function, index: number) => (
           <div
-            style={{ display: "inline" }}
+            className="bg-green-800 hover:bg-green-600 text-white font-semibold  py-0 px-4 rounded-full"
             key={invertIndex(formats.length, index)}
             onClick={(event) => doRemove(index, formats, setFormats)}
           >
@@ -151,20 +161,24 @@ function App() {
       </div>
       <div>Transformations:</div>
       <div>
-        <button onClick={() => doAdd(postfixComma, transforms, setTransforms)}>
+        <button
+          onClick={() => doAdd(postfixComma, transforms, setTransforms)}
+          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+        >
           Postfix Comma
         </button>
         <button
           onClick={() => doAdd(removeWhitespace, transforms, setTransforms)}
+          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
         >
           Remove Whitespace
         </button>
       </div>
       <div>Selected:</div>
-      <div>
+      <div className="flex space-x-4">
         {[...transforms].reverse().map((item: Function, index: number) => (
           <div
-            style={{ display: "inline" }}
+            className="bg-green-800 hover:bg-green-600 text-white font-semibold  py-0 px-4 rounded-full"
             key={invertIndex(formats.length, index)}
             onClick={(event) => doRemove(index, transforms, setTransforms)}
           >
@@ -189,7 +203,12 @@ function App() {
           <textarea cols={30} rows={10} defaultValue={output}></textarea>
         </div>
       </div>
-      <button onClick={() => render()}>Execute</button>
+      <button
+        onClick={() => render()}
+        className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+      >
+        Execute
+      </button>
     </div>
   );
 }
