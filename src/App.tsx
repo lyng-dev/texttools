@@ -5,6 +5,8 @@ import "./App.scss";
 //DONE: adding elements to trasnofrm and format can be made generic as well
 //DONE: add random number generator
 
+const invertIndex = (size: number, index: number) => Math.abs(size - 1 - index);
+
 const generateUUID = (): string => {
   return "XXXXXXXX-XXXX-4XXX-YXXX-XXXXXXXXXXXX".replace(/[XY]/g, (match) => {
     const hexdec = (Math.random() * 16) | 0,
@@ -137,12 +139,13 @@ function App() {
       </div>
       <div>Selected:</div>
       <div>
-        {[...formats].map((item: Function, index: number) => (
+        {[...formats].reverse().map((item: Function, index: number) => (
           <div
-            key={index}
+            style={{ display: "inline" }}
+            key={invertIndex(formats.length, index)}
             onClick={(event) => doRemove(index, formats, setFormats)}
           >
-            {item.name}
+            {item.name} (x)
           </div>
         ))}
       </div>
@@ -159,12 +162,13 @@ function App() {
       </div>
       <div>Selected:</div>
       <div>
-        {[...transforms].map((item: Function, index: number) => (
+        {[...transforms].reverse().map((item: Function, index: number) => (
           <div
-            key={index}
+            style={{ display: "inline" }}
+            key={invertIndex(formats.length, index)}
             onClick={(event) => doRemove(index, transforms, setTransforms)}
           >
-            {item.name}
+            {item.name} (x)
           </div>
         ))}
       </div>
