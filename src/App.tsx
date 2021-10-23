@@ -110,7 +110,7 @@ function App() {
       Type:
       <button
         onClick={() => doGenerate(generateUUID, generateCount)}
-        className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+        className="action-button"
       >
         GUID
       </button>{" "}
@@ -118,7 +118,7 @@ function App() {
         onClick={() =>
           doGenerate(generateRandomNumber, generateCount, randomFrom, randomTo)
         }
-        className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+        className="action-button"
       >
         Numbers
       </button>{" "}
@@ -147,21 +147,21 @@ function App() {
       <div>
         <button
           onClick={() => doAdd(toUpperCase, formats, setFormats)}
-          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          className="action-button"
         >
           UPPERCASE
         </button>
         <button
           onClick={() => doAdd(toLowerCase, formats, setFormats)}
-          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          className="action-button"
         >
           lowercase
         </button>
         <button
           onClick={() => doAdd(capitalizeEveryWord, formats, setFormats)}
-          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          className="action-button"
         >
-          CapitalizeWord
+          Capitalize-Word
         </button>
       </div>
       <div>Selected:</div>
@@ -169,7 +169,7 @@ function App() {
         {[...formats].reverse().map((item: Function, index: number) => (
           <div
             style={{ cursor: "pointer" }}
-            className="bg-green-800 hover:bg-green-600 text-white font-semibold  py-0 px-4 rounded-full"
+            className="pill-button"
             key={invertIndex(formats.length, index)}
             onClick={(event) =>
               doRemove(invertIndex(formats.length, index), formats, setFormats)
@@ -183,13 +183,13 @@ function App() {
       <div>
         <button
           onClick={() => doAdd(postfixComma, transforms, setTransforms)}
-          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          className="action-button"
         >
           Postfix Comma
         </button>
         <button
           onClick={() => doAdd(removeWhitespace, transforms, setTransforms)}
-          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          className="action-button"
         >
           Remove Whitespace
         </button>
@@ -199,7 +199,7 @@ function App() {
         {[...transforms].reverse().map((item: Function, index: number) => (
           <div
             style={{ cursor: "pointer" }}
-            className="bg-green-800 hover:bg-green-600 text-white font-semibold  py-0 px-4 rounded-full"
+            className="pill-button"
             key={invertIndex(transforms.length, index)}
             onClick={(event) =>
               doRemove(
@@ -230,10 +230,7 @@ function App() {
           <textarea cols={30} rows={10} defaultValue={output}></textarea>
         </div>
       </div>
-      <button
-        onClick={() => render()}
-        className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-      >
+      <button onClick={() => render()} className="action-button">
         Execute
       </button>
     </div>
