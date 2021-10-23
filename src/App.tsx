@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 //TODO: Better styling with Tailwind
-//TODO: Simplify Transforms, Formatters and Selectors into a continuous chain of function calls.
+//DONE: Simplify Transforms, Formatters and Selectors into a continuous chain of function calls.
 //TODO: Introduce the concept of a selector, and integrate it into the mix
 //TODO: Delete operation
 //DONE: CapitalizeEveryWord
@@ -50,8 +50,7 @@ function App() {
   const [generateCount, setGenerateCount] = useState(1);
   const [randomFrom, setRandomFrom] = useState(0);
   const [randomTo, setRandomTo] = useState(100);
-  const [formats, setFormats] = useState<Array<Function>>([]);
-  const [transforms, setTransforms] = useState<Array<Function>>([]);
+  const [operations, setOperations] = useState<Array<Function>>([]);
 
   //adding
   const doAdd = (
@@ -59,6 +58,17 @@ function App() {
     collection: Function[],
     add: Function
   ) => add([newFunction].concat(collection));
+
+  //remove from collection
+  const doRemove = (
+    index: number,
+    collection: Function[],
+    remove: Function
+  ) => {
+    const currentCollection = [...collection];
+    currentCollection.splice(index, 1);
+    remove(currentCollection);
+  };
 
   //running generators
   const doGenerate = (
@@ -72,8 +82,8 @@ function App() {
   };
 
   //render output, from performing all actions
-  const render = () =>
-    setOutput(perform([...transforms], perform([...formats], input)));
+  const render = () => setOutput(perform([...operations], input));
+  //setOutput(perform([...transforms], perform([...formats], input)));
 
   //perform collection on input
   const perform = (collection: Function[], input: string) => {
@@ -81,17 +91,6 @@ function App() {
     let t: Function | undefined;
     while ((t = collection.pop())) output = t.call(null, output);
     return output;
-  };
-
-  //remove from collection
-  const doRemove = (
-    index: number,
-    collection: Function[],
-    remove: Function
-  ) => {
-    const currentCollection = [...collection];
-    currentCollection.splice(index, 1);
-    remove(currentCollection);
   };
 
   return (
@@ -149,66 +148,51 @@ function App() {
       [<h2>Formatters:</h2>
       <div>
         <button
-          onClick={() => doAdd(toUpperCase, formats, setFormats)}
+          onClick={() => doAdd(toUpperCase, operations, setOperations)}
           className="action-button"
         >
           UPPERCASE
         </button>
         <button
-          onClick={() => doAdd(toLowerCase, formats, setFormats)}
+          onClick={() => doAdd(toLowerCase, operations, setOperations)}
           className="action-button"
         >
           lowercase
         </button>
         <button
-          onClick={() => doAdd(capitalizeEveryWord, formats, setFormats)}
+          onClick={() => doAdd(capitalizeEveryWord, operations, setOperations)}
           className="action-button"
         >
           Capitalize-Word
         </button>
       </div>
-      <div>Selected:</div>
-      <div className="flex space-x-4">
-        {[...formats].reverse().map((item: Function, index: number) => (
-          <div
-            style={{ cursor: "pointer" }}
-            className="pill-button"
-            key={invertIndex(formats.length, index)}
-            onClick={(event) =>
-              doRemove(invertIndex(formats.length, index), formats, setFormats)
-            }
-          >
-            {item.name} (x)
-          </div>
-        ))}
-      </div>
       <h2>Transformations:</h2>
       <div>
         <button
-          onClick={() => doAdd(postfixComma, transforms, setTransforms)}
+          onClick={() => doAdd(postfixComma, operations, setOperations)}
           className="action-button"
         >
           Postfix Comma
         </button>
         <button
-          onClick={() => doAdd(removeWhitespace, transforms, setTransforms)}
+          onClick={() => doAdd(removeWhitespace, operations, setOperations)}
           className="action-button"
         >
           Remove Whitespace
         </button>
       </div>
-      <div>Selected:</div>
+      <div>Operations:</div>
       <div className="flex space-x-4">
-        {[...transforms].reverse().map((item: Function, index: number) => (
+        {[...operations].reverse().map((item: Function, index: number) => (
           <div
             style={{ cursor: "pointer" }}
             className="pill-button"
-            key={invertIndex(transforms.length, index)}
+            key={invertIndex(operations.length, index)}
             onClick={(event) =>
               doRemove(
-                invertIndex(transforms.length, index),
-                transforms,
-                setTransforms
+                invertIndex(operations.length, index),
+                operations,
+                setOperations
               )
             }
           >
