@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 
 //TODO: Better styling with Tailwind
+//DONE: CapitalizeEveryWord
 //DONE: perform functions can be joined into a generic implementation
 //DONE: adding elements to trasnofrm and format can be made generic as well
 //DONE: add random number generator
@@ -20,14 +21,22 @@ const generateRandomNumber = ([from, to]: number[]) => {
   return Math.floor(Math.random() * (to - from) + from).toString();
 };
 
-const regexReplace = (input: string, regex: RegExp, replacement: string) =>
-  input.replace(regex, replacement);
+const regexReplace = (
+  input: string,
+  regex: RegExp,
+  replacer: (x: string, y: any[]) => string
+) => input.replace(regex, replacer);
 
 const postfixComma = (input: string): string =>
-  regexReplace(input, /[\n]/g, ",\n");
+  regexReplace(input, /[\n]/g, () => ",\n");
 
 const removeWhitespace = (input: string): string =>
-  regexReplace(input, /[\x00-\x1F\x80-\xFF\ ]/g, "");
+  regexReplace(input, /[\x00-\x1F\x80-\xFF\ ]/g, () => "");
+
+const capitalizeEveryWord = (input: string): string =>
+  regexReplace(input, /(\b[a-z](?!\s))/g, (substring: string, __: any[]) =>
+    substring.toUpperCase()
+  );
 
 const toUpperCase = (input: string): string => input.toUpperCase();
 
@@ -147,6 +156,12 @@ function App() {
           className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
         >
           lowercase
+        </button>
+        <button
+          onClick={() => doAdd(capitalizeEveryWord, formats, setFormats)}
+          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+        >
+          CapitalizeWord
         </button>
       </div>
       <div>Selected:</div>
