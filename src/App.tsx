@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 
-//TODO: perform functions can be joined into a generic implementation
+//TODO: Better styling with Tailwind
+//DONE: perform functions can be joined into a generic implementation
 //DONE: adding elements to trasnofrm and format can be made generic as well
 //DONE: add random number generator
 
