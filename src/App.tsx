@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-
 //TODO: Better styling with Tailwind
+//TODO: Simplify Transforms, Formatters and Selectors into a continuous chain of function calls.
+//TODO: Introduce the concept of a selector, and integrate it into the mix
+//TODO: Delete operation
 //DONE: CapitalizeEveryWord
 //DONE: perform functions can be joined into a generic implementation
 //DONE: adding elements to trasnofrm and format can be made generic as well
@@ -93,8 +95,9 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Generator: (overwrites input)</h1>
+    <div className="App container mx-auto">
+      <h1>My Little Text Tool</h1>
+      <h2>Generator: (overwrites input)</h2>
       Count:
       <input
         type="number"
@@ -143,7 +146,7 @@ function App() {
         placeholder="to"
         onChange={(event) => setRandomTo(parseInt(event.currentTarget.value))}
       />
-      [<div>Formatters:</div>
+      [<h2>Formatters:</h2>
       <div>
         <button
           onClick={() => doAdd(toUpperCase, formats, setFormats)}
@@ -179,7 +182,7 @@ function App() {
           </div>
         ))}
       </div>
-      <div>Transformations:</div>
+      <h2>Transformations:</h2>
       <div>
         <button
           onClick={() => doAdd(postfixComma, transforms, setTransforms)}
