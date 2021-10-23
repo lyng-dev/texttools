@@ -16,7 +16,7 @@ const generateUUID = (): string => {
 };
 
 const generateRandomNumber = ([from, to]: number[]) => {
-  return (Math.floor(Math.random() * to) + from).toString();
+  return Math.floor(Math.random() * (to - from) + from).toString();
 };
 
 const regexReplace = (input: string, regex: RegExp, replacement: string) =>
@@ -55,6 +55,7 @@ function App() {
     ...args: (number | undefined)[]
   ) => {
     const generatedValues = [...Array(count)].map(() => generator(args));
+    setOutput("");
     setInput(generatedValues.join("\n"));
   };
 
@@ -151,9 +152,12 @@ function App() {
       <div className="flex space-x-4">
         {[...formats].reverse().map((item: Function, index: number) => (
           <div
+            style={{ cursor: "pointer" }}
             className="bg-green-800 hover:bg-green-600 text-white font-semibold  py-0 px-4 rounded-full"
             key={invertIndex(formats.length, index)}
-            onClick={(event) => doRemove(index, formats, setFormats)}
+            onClick={(event) =>
+              doRemove(invertIndex(formats.length, index), formats, setFormats)
+            }
           >
             {item.name} (x)
           </div>
@@ -178,9 +182,16 @@ function App() {
       <div className="flex space-x-4">
         {[...transforms].reverse().map((item: Function, index: number) => (
           <div
+            style={{ cursor: "pointer" }}
             className="bg-green-800 hover:bg-green-600 text-white font-semibold  py-0 px-4 rounded-full"
-            key={invertIndex(formats.length, index)}
-            onClick={(event) => doRemove(index, transforms, setTransforms)}
+            key={invertIndex(transforms.length, index)}
+            onClick={(event) =>
+              doRemove(
+                invertIndex(transforms.length, index),
+                transforms,
+                setTransforms
+              )
+            }
           >
             {item.name} (x)
           </div>
