@@ -4,6 +4,7 @@ import "./App.css";
 //DONE: Simplify Transforms, Formatters and Selectors into a continuous chain of function calls.
 //TODO: Introduce the concept of a selector, and integrate it into the mix
 //TODO: Delete operation
+//TODO: Make it possible to drag one operation to a different location
 //DONE: CapitalizeEveryWord
 //DONE: perform functions can be joined into a generic implementation
 //DONE: adding elements to trasnofrm and format can be made generic as well
@@ -43,6 +44,10 @@ const capitalizeEveryWord = (input: string): string =>
 const toUpperCase = (input: string): string => input.toUpperCase();
 
 const toLowerCase = (input: string): string => input.toLowerCase();
+
+const selectLines = (input: string): string => input;
+
+const selectAll = (input: string): string => input;
 
 function App() {
   const [output, setOutput] = useState("");
@@ -145,7 +150,20 @@ function App() {
         placeholder="to"
         onChange={(event) => setRandomTo(parseInt(event.currentTarget.value))}
       />
-      [<h2>Formatters:</h2>
+      [<h2>Selectors:</h2>
+      <button
+        onClick={() => doAdd(selectAll, operations, setOperations)}
+        className="action-button"
+      >
+        All Text
+      </button>
+      <button
+        onClick={() => doAdd(selectLines, operations, setOperations)}
+        className="action-button"
+      >
+        Lines
+      </button>
+      <h2>Formatters:</h2>
       <div>
         <button
           onClick={() => doAdd(toUpperCase, operations, setOperations)}
@@ -166,7 +184,7 @@ function App() {
           Capitalize-Word
         </button>
       </div>
-      <h2>Transformations:</h2>
+      <h2>Transforms:</h2>
       <div>
         <button
           onClick={() => doAdd(postfixComma, operations, setOperations)}
